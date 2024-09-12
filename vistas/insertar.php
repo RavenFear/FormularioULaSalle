@@ -11,7 +11,7 @@
     <?php
     session_start();
     ?>
-    <title>Registro de Personas</title>
+    <title>Registro</title>
 </head>
 <body>
 <div class="container mt-4">
@@ -26,7 +26,12 @@
                         <div class="row">
                             <div class="form-group">
                                 <label>CEDULA</label>
-                                <input type="text" name="txtdni" class="form-control" placeholder="Digite su cedula..">
+                                <input type="text" name="cedula" class="form-control" placeholder="Digite su cedula..">
+                            </div>
+                            <div class="form-group">
+                                <label>NOMBRES</label>
+                                <input type="text" name="txtnombres" class="form-control"
+                                       placeholder="Ingrese sus nombres completos...">
                             </div>
                             <div class="form-group">
                                 <label>APELLIDOS</label>
@@ -34,9 +39,29 @@
                                        placeholder="Ingrese sus apellidos completos..">
                             </div>
                             <div class="form-group">
-                                <label>NOMBRES</label>
-                                <input type="text" name="txtnombres" class="form-control"
-                                       placeholder="Ingrese sus nombres completos...">
+                                <label>CARRERA</label>
+                                <input type="text" name="txtcarrera" class="form-control"
+                                       placeholder="Ingrese su carrera..">
+                            </div>
+                            <div class="form-group">
+                                <label>CORREO</label>
+                                <input type="text" name="txtcorreo" class="form-control"
+                                       placeholder="Ingrese su correo..">
+                            </div>
+                            <div class="form-group">
+                                <label>CORREO INSTITUCIONAL</label>
+                                <input type="text" name="txtcorreoinstitucional" class="form-control"
+                                       placeholder="Ingrese su correo institucional..">
+                            </div>
+                            <div class="form-group">
+                                <label>TELEFONO</label>
+                                <input type="text" name="txttelefono" class="form-control"
+                                       placeholder="Ingrese su telefono..">
+                            </div>
+                            <div class="form-group">
+                                <label>ASUNTO</label>
+                                <input type="text" name="txtasunto" class="form-control"
+                                       placeholder="Ingrese su asunto..">
                             </div>
                         </div>
                     </div>

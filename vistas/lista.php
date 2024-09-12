@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Lista de Personas</title>
+    <title>Formulario de contacto U La Salle</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
@@ -11,15 +11,15 @@ include '../config/conexion.php';
 $bs = new conexion();
 
 // Obtener filtros de búsqueda
-$filter_dni = isset($_GET['filter_dni']) ? $_GET['filter_dni'] : '';
+$filter_cedula = isset($_GET['filter_cedula']) ? $_GET['filter_cedula'] : '';
 $filter_persona = isset($_GET['filter_persona']) ? $_GET['filter_persona'] : '';
 
 // Construir la consulta SQL con filtros
 $sql = "SELECT * FROM personas WHERE 1=1";
 
 // Agregar condiciones de filtro si se proporcionan
-if (!empty($filter_dni)) {
-    $sql .= " AND dni LIKE '%$filter_dni%'";
+if (!empty($filter_cedula)) {
+    $sql .= " AND cedula LIKE '%$filter_cedula%'";
 }
 if (!empty($filter_persona)) {
     $sql .= " AND CONCAT(nombre, ' ', apellido) LIKE '%$filter_persona%'";
@@ -29,9 +29,26 @@ $bs->sql = $sql;
 $bs->res = mysqli_query($bs->conector, $bs->sql);
 $contador = 0;
 ?>
+<style>
+    th, td {
+        white-space: nowrap; /* Evita que el texto se ajuste en múltiples líneas */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Agrega '...' cuando el texto es demasiado largo */
+    }
+    .table th:nth-child(1) { width: 5%; } /* Ajusta el ancho de la primera columna */
+    .table th:nth-child(2) { width: 15%; }
+    .table th:nth-child(3) { width: 15%; }
+    .table th:nth-child(4) { width: 10%; }
+    .table th:nth-child(5) { width: 10%; }
+    .table th:nth-child(6) { width: 15%; }
+    .table th:nth-child(7) { width: 15%; }
+    .table th:nth-child(8) { width: 10%; }
+    .table th:nth-child(9) { width: 10%; }
+    .table th:nth-child(10) { width: 15%; }
+</style>
 <body>
 <div class="text-center">
-    <h1><u>Lista de Personas</u></h1>
+    <h3>Lista formulario de contacto U La Salle</h3>
 </div>
 <div class="container">
     <div class="mt-2">
@@ -41,8 +58,9 @@ $contador = 0;
                 <form method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="filter_dni" class="form-control" placeholder="Filtrar por documento"
-                                   value="<?= htmlspecialchars($filter_dni) ?>">
+                            <input type="text" name="filter_cedula" class="form-control"
+                                   placeholder="Filtrar por documento"
+                                   value="<?= htmlspecialchars($filter_cedula) ?>">
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary">Filtrar</button>
@@ -55,10 +73,16 @@ $contador = 0;
                     <table class="table table-bordered">
                         <thead class="text-center bg-dark text-white">
                         <tr>
-                            <th><strong>ITEM</strong></th>
-                            <th><strong>CEDULA</strong></th>
-                            <th><strong>PERSONA</strong></th>
-                            <th><strong>ACCIÓN</strong></th>
+                            <th style="width: 5%"><strong>N°</strong></th>
+                            <th style="width: 15%"><strong>NOMBRE</strong></th>
+                            <th style="width: 15%"><strong>APELLIDO</strong></th>
+                            <th style="width: 10%"><strong>CÉDULA</strong></th>
+                            <th style="width: 10%"><strong>CARRERA</strong></th>
+                            <th style="width: 15%"><strong>CORREO</strong></th>
+                            <th style="width: 15%"><strong>CORREO INSTITUCIONAL</strong></th>
+                            <th style="width: 10%"><strong>TELEFONO</strong></th>
+                            <th style="width: 10%"><strong>ASUNTO</strong></th>
+                            <th style="width: 15%"><strong>ACCIÓN</strong></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -70,7 +94,13 @@ $contador = 0;
                                 <tr>
                                     <td><?= $contador ?></td>
                                     <td><?= htmlspecialchars($persona[1]) ?></td>
-                                    <td><?= htmlspecialchars($persona[3] . " " . $persona[2]) ?></td>
+                                    <td><?= htmlspecialchars($persona[2]) ?></td>
+                                    <td><?= htmlspecialchars($persona[3]) ?></td>
+                                    <td><?= htmlspecialchars($persona[4]) ?></td>
+                                    <td><?= htmlspecialchars($persona[5]) ?></td>
+                                    <td><?= htmlspecialchars($persona[6]) ?></td>
+                                    <td><?= htmlspecialchars($persona[7]) ?></td>
+                                    <td><?= htmlspecialchars($persona[8]) ?></td>
                                     <td>
                                         <a href="editar.php?id=<?= $persona[0] ?>"
                                            class="btn btn-outline-warning btn-sm"><strong>Editar</strong></a>
@@ -80,7 +110,7 @@ $contador = 0;
                                 </tr>
                             <?php }
                         } else {
-                            echo '<tr><th colspan="4" class="alert alert-danger text-center">No hay datos para mostrar</th></tr>';
+                            echo '<tr><th colspan="9" class="alert alert-danger text-center">No hay datos para mostrar</th></tr>';
                         } ?>
                         </tbody>
                     </table>
